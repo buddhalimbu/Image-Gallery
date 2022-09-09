@@ -5,21 +5,20 @@ let $$ = (selector) => document.querySelectorAll(selector);
 var body = $("body");
 var header = $(".header");
 var sticky = header.offsetTop;
+var logo = $(".logo");
 var togmenu = $(".bars");
 var gototop = $(".gototop");
 var year = new Date().getFullYear();
 var overlay = $(".overlay");
 var yeardiv = $(".year");
 
-function getYear() {
+
     //get  year
     yeardiv.innerHTML = year;
-}
-getYear();
-
-function reloadWebsite(){
-  window.location.href = "/";
-}
+ //Reload
+logo.addEventListener("click",function(){
+   window.location.href = "/";
+});
 
 //menu function
 togmenu.onclick = (e) => {
