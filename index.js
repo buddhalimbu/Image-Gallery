@@ -107,7 +107,7 @@ const options = {
         let url = window.URL.createObjectURL(blob);
         let a = document.createElement('a');
         a.href = url;
-        a.download = "${imgsrc}.jpg";
+        a.download = imgsrc;
         a.click();
       });
     }); 
