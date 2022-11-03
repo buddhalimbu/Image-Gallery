@@ -97,20 +97,22 @@ x.addEventListener("click", function(e){
   // https://codepen.io/MadanBhandari/pen/vbaKGJ
   
   function downloadImage(url) {
-  fetch(url, {
-    mode : 'no-cors',
-  })
-    .then(response => response.blob())
-    .then(blob => {
-    let blobUrl = window.URL.createObjectURL(blob);
-    let a = document.createElement('a');
-    a.download = url.replace(/^.*[\\\/]/, '');
-    a.href = blobUrl;
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
-  })
+const options = {
+  'Accept': 'application/json',
+  'Content-Type': 'application/json'
+};
+  fetch(url, options)
+   .then( response => {
+    response.blob().then(blob => {
+        let url = window.URL.createObjectURL(blob);
+        let a = document.createElement('a');
+        a.href = url;
+        a.download = "file.jpg";
+        a.click();
+      });
+    }); 
 }
+
 
   //append the button close
   imgHolder.append(imgClose,newImage,dImg);
