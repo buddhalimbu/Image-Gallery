@@ -83,6 +83,8 @@ x.addEventListener("click", function(e){
   dWrap.className = "dWrap";
   //copy links input
   
+  const numbers = ["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30"];
+  const number = numbers[Math.floor(Math.random() * numbers.length)];
   const dImg = document.createElement("a");
   dImg.className = "dimg";
   dImg.href = imgsrc;
@@ -107,7 +109,7 @@ const options = {
         let url = window.URL.createObjectURL(blob);
         let a = document.createElement('a');
         a.href = url;
-        a.download = imgsrc;
+        a.download = "My-Image"+[number]+".jpg";
         a.click();
       });
     }); 
