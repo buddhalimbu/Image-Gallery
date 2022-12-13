@@ -128,9 +128,12 @@ const options = {
 const hiddenItems = [...document.querySelectorAll('.hidden')];
 const loadmore = document.getElementById('loadMore');
 
-hiddenItems.splice(0, 20).forEach(
-  elem => elem.style.display="flex"
-);
+hiddenItems.splice(0, 20).forEach((elem) =>{
+  elem.style.display="flex";
+  setTimeout(() =>{
+  elem.classList.add('add-ts');
+  },1000);
+});
 
 loadmore.addEventListener('click', function(e) {
   e.preventDefault();
@@ -142,8 +145,12 @@ loadmore.addEventListener('click', function(e) {
     if( iup ==5 ) { i=0; }
       
     elem.classList.add(xcls[iup]);
+
     iup++;
-    elem.style.display='flex'
+    elem.style.display='flex';
+   setTimeout(() =>{
+  elem.classList.add('add-ts');
+  },1000);
  
       
   });
