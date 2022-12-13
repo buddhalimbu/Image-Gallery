@@ -128,17 +128,25 @@ const options = {
 const hiddenItems = [...document.querySelectorAll('.hidden')];
 const loadmore = document.getElementById('loadMore');
 
-hiddenItems.splice(0, 21).forEach(
+hiddenItems.splice(0, 20).forEach(
   elem => elem.style.display="flex"
 );
 
 loadmore.addEventListener('click', function(e) {
   e.preventDefault();
+  var xcls = ["flex1","flex2","flex3","flex4","flex5"];
+    var iup = 0;
 
-  hiddenItems.splice(0, 5).forEach(
-    elem => elem.style.display="flex"
-  )
-
+  hiddenItems.splice(0, 5).forEach((elem) => {
+    
+    if( iup ==5 ) { i=0; }
+      
+    elem.classList.add(xcls[iup]);
+    iup++;
+    elem.style.display='flex'
+ 
+      
+  });
   if (hiddenItems.length == 0) {
     loadmore.innerHTML = "<span id='loadmore'>" + " No Images" + "</span>";
   }
