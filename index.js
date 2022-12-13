@@ -137,7 +137,7 @@ loadmore.addEventListener('click', function(e) {
   var xcls = ["flex1","flex2","flex3","flex4","flex5"];
     var iup = 0;
 
-  hiddenItems.splice(0, 5).forEach((elem) => {
+  hiddenItems.splice(0, 10).forEach((elem) => {
     
     if( iup ==5 ) { i=0; }
       
