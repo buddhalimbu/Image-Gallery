@@ -54,6 +54,36 @@ window.onscroll = () => {
         gototop.classList.remove("showgtt");
     }
 }
+
+$(".addImg").addEventListener("click",(e) =>{
+  
+  var newClasses = ["flex1","flex2","flex3","flex4","flex5","flex6","flex7","flex8","flex9","flex10"];
+  var newClass = newClasses[Math.floor(Math.random() * newClasses.length)];
+  var eD = document.querySelector(".gallery-section");
+  var inputUrl = $(".inputurl");
+  var dnew = document.createElement("div");
+  dnew.className = "appendDiv";
+  const newIn = document.createElement("img");
+  newIn.src = inputUrl.value;
+  dnew.appendChild(newIn);
+  if(inputUrl.value===""){
+    alert("ops")
+  }
+  else{
+    
+   eD.prepend(dnew);
+   setTimeout(() =>{
+     dnew.classList.add("add-ts");
+     dnew.classList.add(newClass)
+   })
+  }
+  inputUrl.value=''
+});
+
+
+
+
+
 //image open
 window.onload = function(){
 const image = $$('#gl img');
@@ -83,16 +113,34 @@ x.addEventListener("click", function(e){
   dWrap.className = "dWrap";
   //copy links input
   
-  const numbers = ["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50"];
-  const number = numbers[Math.floor(Math.random() * numbers.length)];
+
+  const number = Math.floor((Math.random() * 9000) + 1);
+  const cs = document.createElement("span");
+  cs.className = "copysrc";
+  cs.appendChild(document.createTextNode("Copy Src"));
   const dImg = document.createElement("a");
   dImg.className = "dimg";
   dImg.href = imgsrc;
   dImg.download = "My Image";
   dImg.appendChild(document.createTextNode("Download"));
+  cs.addEventListener("click", (e)=>{
+    var areabox=document.createElement("textarea");
+    areabox.value=imgsrc;
+    document.body.appendChild(areabox);
+    areabox.focus();
+    areabox.select();
+    document.execCommand("copy");
+    document.body.removeChild(areabox);
+    e.target.innerHTML='Src Copied';
+    e.target.style.background='#d5001c';
+    setTimeout(()=>{
+      e.target.style.display='none'
+    },3000);
+  });
   dImg.addEventListener("click", (event) => {
     event.preventDefault();
-    downloadImage(imgsrc)
+    downloadImage(imgsrc);
+    event.target.style.display='none'
   });
   
   //download image script 
@@ -117,7 +165,7 @@ const options = {
 
 
   //append the button close
-  imgHolder.append(imgClose,newImage,dImg);
+  imgHolder.append(imgClose,newImage,dImg,cs);
   document.body.appendChild(imgHolder)
 });
 });
@@ -128,36 +176,39 @@ const options = {
 const hiddenItems = [...document.querySelectorAll('.hidden')];
 const loadmore = document.getElementById('loadMore');
 
-hiddenItems.splice(0, 20).forEach((elem) =>{
+hiddenItems.splice(0, 20).forEach((elem) => { 
   elem.style.display="flex";
   setTimeout(() =>{
   elem.classList.add('add-ts');
   },1000);
 });
 
-loadmore.addEventListener('click', function(e) {
+loadmore.addEventListener('click',loadImage);
+
+function loadImage(e) {
   e.preventDefault();
-  var xcls = ["flex1","flex2","flex3","flex4","flex5"];
+  var xcls = ["flex1","flex2","flex3","flex4","flex5","flex6","flex7","flex8","flex9","flex10"];
     var iup = 0;
 
   hiddenItems.splice(0, 10).forEach((elem) => {
     
-    if( iup ==5 ) { i=0; }
+    if( iup ==10 ) { i=0; }
       
     elem.classList.add(xcls[iup]);
-
     iup++;
     elem.style.display='flex';
-   setTimeout(() =>{
-  elem.classList.add('add-ts');
-  },1000);
+    setTimeout(() =>{
+      elem.classList.add('add-ts');
+    },500);
  
       
   });
+
   if (hiddenItems.length == 0) {
     loadmore.innerHTML = "<span id='loadmore'>" + " No Images" + "</span>";
   }
-});
+}
+
 
 
 const dk = $$(".menu ul a");
@@ -165,6 +216,7 @@ const dk = $$(".menu ul a");
 dk.forEach((n) => {
   n.setAttribute('target','_blank');
   if(n.matches(".about,.contact")){
+    
     //create about
     const about = " We are free platform where you can download plenty of stock images from us for your project, blogs etc, The images downloaded from here are coyright free.";
     const contact = "";
@@ -178,7 +230,7 @@ dk.forEach((n) => {
     const sInner = document.createTextNode(nTxt);
     title.appendChild(sInner);
     const sDiv = document.createElement("div");
-    sDiv.className ="sdiv";
+    sDiv.className ="sdivitem";
     //close button 
     const sClose = document.createElement("span");
     sClose.className="imgClose";
@@ -195,7 +247,6 @@ dk.forEach((n) => {
     const sLay = document.createElement("div");
     sLay.className = "imgHolder";
     sLay.appendChild(sClose);
-    
     if(event.target.matches(".about")){
       event.preventDefault();
       console.log("worked");
@@ -226,3 +277,18 @@ function openSocial(){
   const social = $(".icons");
   social.classList.toggle("show")
 }
+
+$(".adddemoimg").addEventListener('click', (e) =>{
+  console.log("ok");
+  const thisme=e.target;
+  const itemsdiv =$(".sdiv");
+  const itemclose =$(".xclose");
+  itemclose.appendChild(document.createTextNode("\u00D7"));
+  itemclose.addEventListener("click", (x) =>{
+    itemsdiv.classList.remove("show");
+    thisme.classList.remove("remove");
+    x.target.innerHTML=''
+  } )
+  itemsdiv.classList.add("show");
+  e.target.classList.add("remove");
+})
